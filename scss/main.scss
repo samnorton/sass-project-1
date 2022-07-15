@@ -1,24 +1,72 @@
+@import "test";
+
 $color-primary: orange;
 $color-secondary: gray;
-$color-tertiary: green;
+$color-tertiary: red;
 
 $font-lg: 40px;
 $font-md: 30px;
 $font-sm: 20px;
 
 .nav{
-    background-color: $color-primary;
+    background-color: lighten($color-primary, 40%);
+
+    ul li {
+        list-style: none;
+    }
+
+    a {
+        text-decoration: none;
+        font-size: $font-sm;
+        color: $color-secondary;
+
+        &:hover{
+            color: $color-tertiary;
+        }
+    }
 }
 
-.banner h1{
-    $color-secondary: red;
+// @mixin headingStyle($fontSize: 50px) {
+//     font-size: $fontSize;
+//     color: $color-secondary;
+//     text-align: center;
+// }
+
+// @mixin transition($param...){
+//     transition: $param;
+// }
+
+%heading{
+    color: $color-primary;
     font-size: $font-lg;
-    color: $color-secondary;
+    background-color: $color-secondary;
     text-align: center;
+}
+
+
+@function fontSize($size) {
+    @return $size * 2;
+}
+
+h1{
+    // @include headingStyle($font-lg);
+    @extend %heading;
+
+    &:hover{
+        background-color: green;
+    }
 }
 
 .footer h3{
-    font-size: $font-md;
-    color: $color-secondary;
-    text-align: center;
+    // @include headingStyle;
+    // @include transition(color .5s, background-color 1s);
+    // &:hover {
+    //     color: $color-tertiary;
+    //     background-color: $color-primary;
+    // }
+    @extend h1;
+}
+
+.footer p {
+    font-size: fontSize($font-sm);
 }
